@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "boot-dev-static-site"
+version = "0.1.0"
+description = ""
+authors = ["jalho <j.pd.alho@gmail.com>"]
+readme = "README.md"
+packages = [{include = "boot"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
