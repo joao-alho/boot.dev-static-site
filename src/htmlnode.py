@@ -1,9 +1,5 @@
 class HTMLNode:
-    def __init__(self,
-                 tag=None,
-                 value=None,
-                 children=None,
-                 props: dict = None):
+    def __init__(self, tag=None, value=None, children=None, props: dict = None):
         self.tag = tag
         self.value = value
         self.children = children
@@ -16,11 +12,16 @@ class HTMLNode:
         if self.props is None:
             return ""
         else:
-            props_html = map(lambda k: f" {k}=\"{self.props[k]}\"", self.props)
+            props_html = map(lambda k: f' {k}="{self.props[k]}"', self.props)
             return "".join(props_html)
 
     def __eq__(self, o):
-        return self.tag == o.tag and self.value == o.value and self.children == o.children and self.props == o.props
+        return (
+            self.tag == o.tag
+            and self.value == o.value
+            and self.children == o.children
+            and self.props == o.props
+        )
 
     def __repr__(self):
         return f"HTMLNode({self.tag}, {self.value}, {self.children}, {self.props})"
@@ -28,7 +29,7 @@ class HTMLNode:
 
 class LeafNode(HTMLNode):
     def __init__(self, tag, value, props=None):
-        if not value:
+        if value is None:
             raise ValueError("All leaf nodes require a value")
         super().__init__(tag=tag, value=value, children=None, props=props)
 

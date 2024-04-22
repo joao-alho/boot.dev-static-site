@@ -1,12 +1,8 @@
 import unittest
 
-from src.htmldode import LeafNode
+from src.htmlnode import LeafNode
 from src.textnode import TextNode, text_node_to_html_node
-from src.inline_markdown import (
-    split_nodes_delimiter,
-    text_type_text,
-    text_type_code
-)
+from src.inline_markdown import split_nodes_delimiter, text_type_text, text_type_code
 
 
 class TestTextNode(unittest.TestCase):
@@ -21,8 +17,7 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(text_node_to_html_node(node), result)
 
     def test_split_nodes(self):
-        node = TextNode(
-            "This is text with a `code block` word", text_type_text)
+        node = TextNode("This is text with a `code block` word", text_type_text)
         new_nodes = split_nodes_delimiter([node], "`", text_type_code)
         expected_nodes = [
             TextNode("This is text with a ", text_type_text),
@@ -32,14 +27,12 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(new_nodes, expected_nodes)
 
     def test_split_nodes_raises_error(self):
-        node = TextNode(
-            "This is text with a code block` word", text_type_text)
+        node = TextNode("This is text with a code block` word", text_type_text)
         with self.assertRaises(Exception):
             split_nodes_delimiter([node], "`", text_type_code)
 
     def test_split_nodes_dont_split(self):
-        node = TextNode(
-            "This is text with a `code block` word", text_type_code)
+        node = TextNode("This is text with a `code block` word", text_type_code)
         new_nodes = split_nodes_delimiter([node], "`", text_type_code)
         self.assertEqual(new_nodes, [node])
 
